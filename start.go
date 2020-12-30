@@ -8,8 +8,8 @@ import (
 
 func main() {
 	r := gin.Default()
-	r.Use(static.Serve("/", static.LocalFile("dist", false)))
-	r.Use(gzip.Gzip(gzip.DefaultCompression))
+	r.Use(gzip.Gzip(gzip.DefaultCompression),
+		static.Serve("/", static.LocalFile("dist", false)))
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(200, "test")
 	})
